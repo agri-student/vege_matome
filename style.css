@@ -1,0 +1,410 @@
+:root {
+  --leaf-dark: #2f5d34;
+  --leaf: #4f8a3c;
+  --leaf-light: #8fbf5a;
+  --sprout: #d9ecb8;
+  --soil: #7a5234;
+  --soil-dark: #5a3b24;
+  --cream: #fbf7ec;
+  --paper: #fffdf6;
+  --text: #33291f;
+  --text-soft: #6b5a48;
+  --tomato: #d9573b;
+  --radius-lg: 28px;
+  --radius-md: 18px;
+  --shadow: 0 6px 18px rgba(74, 58, 32, 0.12);
+  --shadow-hover: 0 16px 30px rgba(74, 58, 32, 0.2);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  font-family: "Zen Maru Gothic", "Hiragino Maru Gothic ProN", "Hiragino Sans", "Meiryo", sans-serif;
+  color: var(--text);
+  background-color: var(--cream);
+  line-height: 1.7;
+}
+
+/* ---------- ヘッダー ---------- */
+.site-header {
+  position: relative;
+  overflow: hidden;
+  padding: 56px 16px 72px;
+  text-align: center;
+  color: var(--paper);
+  background: linear-gradient(160deg, var(--leaf) 0%, var(--leaf-dark) 100%);
+  border-radius: 0 0 50% 50% / 0 0 48px 48px;
+}
+
+.site-header__inner {
+  position: relative;
+  z-index: 1;
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.site-header__eyebrow {
+  display: inline-block;
+  margin: 0 0 8px;
+  padding: 2px 14px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--leaf-dark);
+  background: var(--sprout);
+  border-radius: 999px;
+}
+
+.site-header__title {
+  margin: 0;
+  font-size: clamp(2rem, 6vw, 3rem);
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  text-shadow: 0 3px 0 rgba(0, 0, 0, 0.15);
+}
+
+.site-header__lead {
+  margin: 12px 0 0;
+  font-size: clamp(0.95rem, 2.6vw, 1.1rem);
+  opacity: 0.95;
+}
+
+.vine {
+  position: absolute;
+  top: -10px;
+  width: 110px;
+  height: 190px;
+  color: var(--leaf-light);
+  opacity: 0.55;
+}
+
+.vine--left {
+  left: 8px;
+}
+
+.vine--right {
+  right: 8px;
+}
+
+/* ---------- 一覧 ---------- */
+.container {
+  flex: 1;
+  width: 100%;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 40px 16px 56px;
+}
+
+.status {
+  margin: 0 auto 24px;
+  max-width: 560px;
+  padding: 14px 20px;
+  text-align: center;
+  background: var(--paper);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow);
+}
+
+.status--error {
+  color: #8a2b1a;
+  background: #fbe9e4;
+}
+
+.vege-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 300px));
+  justify-content: center;
+  gap: 28px;
+}
+
+.vege-grid__item {
+  animation: sprout 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  animation-delay: var(--delay, 0ms);
+}
+
+/* ---------- カード ---------- */
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  color: inherit;
+  text-decoration: none;
+  background: var(--paper);
+  border: 3px solid var(--sprout);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+/* 左上の葉っぱ */
+.card::before {
+  content: "";
+  position: absolute;
+  top: 14px;
+  left: 16px;
+  z-index: 2;
+  width: 34px;
+  height: 22px;
+  background: var(--leaf-light);
+  border-radius: 0 100% 0 100%;
+  transform: rotate(-20deg);
+  transform-origin: bottom left;
+  transition: transform 0.3s ease;
+}
+
+.card:hover,
+.card:focus-visible {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-hover);
+  border-color: var(--leaf-light);
+  animation: wobble 0.6s ease-in-out;
+}
+
+.card:hover::before,
+.card:focus-visible::before {
+  transform: rotate(-38deg);
+}
+
+.card:focus-visible {
+  outline: 4px solid var(--tomato);
+  outline-offset: 4px;
+}
+
+.card:active {
+  transform: translateY(-2px) scale(0.98);
+}
+
+.card__thumb {
+  aspect-ratio: 4 / 3;
+  display: grid;
+  place-items: center;
+  background: var(--sprout);
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+  overflow: hidden;
+}
+
+.card__thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.card:hover .card__thumb img {
+  transform: scale(1.06);
+}
+
+.card__thumb--placeholder {
+  position: relative;
+}
+
+.card__initial {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: clamp(72px, 38%, 104px);
+  aspect-ratio: 1;
+  font-size: clamp(2rem, 7vw, 2.8rem);
+  font-weight: 900;
+  line-height: 1;
+  color: var(--leaf-dark);
+  background: var(--paper);
+  border-radius: 50%;
+  box-shadow: 0 4px 0 rgba(74, 58, 32, 0.1);
+}
+
+/* 頭文字の丸から芽が出ているような葉 */
+.card__placeholder-icon {
+  position: absolute;
+  top: -30%;
+  right: -18%;
+  width: 52%;
+  color: var(--leaf);
+  transform: rotate(35deg);
+  transform-origin: bottom left;
+  transition: transform 0.35s ease;
+}
+
+.card:hover .card__placeholder-icon,
+.card:focus-visible .card__placeholder-icon {
+  transform: rotate(20deg);
+}
+
+.card__body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 18px 22px 22px;
+}
+
+.card__name {
+  margin: 0;
+  font-size: 1.4rem;
+  font-weight: 900;
+  color: var(--leaf-dark);
+}
+
+.card__desc {
+  align-self: flex-start;
+  margin: 0;
+  padding: 2px 12px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--soil-dark);
+  background: #f1e4cf;
+  border-radius: 999px;
+}
+
+.card__cta {
+  margin-top: auto;
+  padding-top: 8px;
+  align-self: flex-end;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--leaf);
+}
+
+.card__cta::after {
+  content: "→";
+  display: inline-block;
+  transition: transform 0.25s ease;
+}
+
+.card:hover .card__cta::after,
+.card:focus-visible .card__cta::after {
+  transform: translateX(4px);
+}
+
+/* ---------- フッター（土） ---------- */
+.site-footer {
+  position: relative;
+  padding: 36px 16px 28px;
+  text-align: center;
+  font-size: 0.85rem;
+  color: #f3e6d4;
+  background: var(--soil);
+}
+
+.site-footer::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -18px;
+  height: 20px;
+  background: radial-gradient(circle at 20px 20px, var(--soil) 19px, transparent 20px) repeat-x;
+  background-size: 40px 20px;
+}
+
+.site-footer p {
+  margin: 0;
+}
+
+.site-footer code {
+  padding: 1px 6px;
+  font-size: 0.9em;
+  background: var(--soil-dark);
+  border-radius: 6px;
+}
+
+/* ---------- アニメーション ---------- */
+@keyframes sprout {
+  from {
+    opacity: 0;
+    transform: translateY(24px) scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes wobble {
+  0% { transform: translateY(-8px) rotate(0deg); }
+  25% { transform: translateY(-8px) rotate(-1.6deg); }
+  50% { transform: translateY(-8px) rotate(1.2deg); }
+  75% { transform: translateY(-8px) rotate(-0.6deg); }
+  100% { transform: translateY(-8px) rotate(0deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* ---------- レスポンシブ ---------- */
+@media (max-width: 600px) {
+  .site-header {
+    padding: 40px 16px 56px;
+  }
+
+  .vine {
+    width: 70px;
+    height: 120px;
+    opacity: 0.4;
+  }
+
+  .container {
+    padding-top: 28px;
+  }
+
+  .vege-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+  }
+
+  .card {
+    border-radius: var(--radius-md);
+  }
+
+  .card__thumb {
+    border-radius: 0 0 var(--radius-md) var(--radius-md);
+  }
+
+  .card__body {
+    padding: 12px 14px 16px;
+  }
+
+  .card__name {
+    font-size: 1.1rem;
+  }
+
+  .card__desc {
+    font-size: 0.75rem;
+    padding: 1px 10px;
+  }
+
+  .card__cta {
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .vege-grid {
+    grid-template-columns: 1fr;
+  }
+}

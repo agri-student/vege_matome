@@ -1,0 +1,20 @@
+[
+  {
+    "name": "トマト",
+    "url": "https://example.github.io/tomato/",
+    "thumbnail": "",
+    "description": "夏野菜・果菜類"
+  },
+  {
+    "name": "キュウリ",
+    "url": "https://example.github.io/cucumber/",
+    "thumbnail": "",
+    "description": "夏野菜・ウリ科"
+  },
+  {
+    "name": "ナス",
+    "url": "https://example.github.io/eggplant/",
+    "thumbnail": "",
+    "description": "夏野菜・ナス科"
+  }
+]
